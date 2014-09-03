@@ -22,11 +22,13 @@ angular.module('localreads.models', [])
 })
 
 .factory('SearchResultsModel', function() {
-    var searchResults = [];
-    var searchResultCount = 0;
+        var searchResults = [];
+        var searchResultCount = 0;
+        var searchQuery = '';
     return {
         searchResults:searchResults,
-        searchResultCount:searchResultCount
+        searchResultCount:searchResultCount,
+        searchQuery:searchQuery
     };
 });
 
