@@ -1,26 +1,37 @@
-<div class="modal">
-  <ion-header-bar>
-    <h1 class="title">Login</h1>
-    <div class="buttons">
-      <button class="button button-clear" ng-click="closeLogin()">Close</button>
+<ion-view title="LocalReads Login">
+    <ion-content class="has-header has-footer">
+        <div class="list card">
+            <form>
+                <div class="list">
+                    <label class="item item-input">
+                        <span class="input-label">Username</span>
+                        <input type="text" ng-model="userModel.userName">
+                    </label>
+                    <label class="item item-input">
+                        <span class="input-label">Password</span>
+                        <input type="password" ng-model="userModel.password">
+                    </label>
+                    <label class="item">
+                        <button class="button button-block button-positive" type="button" ng-click="userModel.login()">
+                            Log in
+                        </button>
+                    </label>
+                    <label class="item">
+                        <button class="button button-block button-balanced" type="button" ng-click="userModel.register()">
+                            Register
+                        </button>
+                    </label>
+                    <label class="item">
+                        <div align="center" class="input-label">{{userModel.message}}</div>
+                     </label>
+                </div>
+            </form>
+
+        </div>
+    </ion-content>
+    <div class="bar bar-footer bar-balanced">
+        <div class="title">Copyright 2014 SquarePrism</div>
     </div>
-  </ion-header-bar>
-  <ion-content>
-    <form ng-submit="doLogin()">
-      <div class="list">
-        <label class="item item-input">
-          <span class="input-label">Username</span>
-          <input type="text" ng-model="loginData.username">
-        </label>
-        <label class="item item-input">
-          <span class="input-label">Password</span>
-          <input type="password" ng-model="loginData.password">
-        </label>
-        <label class="item">
-          <button class="button button-block button-positive" type="submit">Log in</button>
-        </label>
-      </div>
-    </form>
-  </ion-content>
-</div>
+</ion-view>
+
 

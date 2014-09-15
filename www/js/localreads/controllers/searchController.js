@@ -1,17 +1,15 @@
-var localReadControllers = angular.module('localreads.controllers', [])
+'use strict';
 
-localReadControllers.controller('AppCtrl', function($scope, $ionicModal, $timeout) {
-
-});
-
-localReadControllers.controller('HomeCtrl', function($scope) {
-        $scope.name = "Superhero";
-        $scope.counter = 0;
-});
-
-localReadControllers.controller('SearchCtrl', function($scope,SearchResultsModel,BookService) {
+localReadControllers.controller('SearchCtrl', function($scope,
+                                                       SearchResultsModel,
+                                                       LocalReadsModelService,
+                                                       googleBookService) {
 
         $scope.searchResultsModel = SearchResultsModel;
+
+        $scope.addToShelf = function($event,data){
+            LocalReadsModelService.addToShelf(data);
+        };
 
         $scope.searchBooks = function(){
 
@@ -21,9 +19,11 @@ localReadControllers.controller('SearchCtrl', function($scope,SearchResultsModel
                 return;
             }
 
+            console.log("Search books " + $scope.searchResultsModel.searchQuery);
+
             //search query is non-empty
             // use a service to load books from Google books
-            var responseData = BookService.searchBooks($scope.searchResultsModel.searchQuery)
+            var responseData = googleBookService.searchBooks($scope.searchResultsModel.searchQuery)
             .then(function(response){
                 $scope.updateResults(response);
             },(function(error){
@@ -33,7 +33,7 @@ localReadControllers.controller('SearchCtrl', function($scope,SearchResultsModel
 
         $scope.updateResults = function(response){
             $scope.searchResultsModel.searchResultCount = response.length;
-            $scope.searchResultsModel.searchResults = response;
+            $scope.searchResultsModel.searchResults = response.items;
         }
 
 });

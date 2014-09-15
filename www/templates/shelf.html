@@ -1,13 +1,13 @@
-<ion-view title="Local Reads">
+<ion-view title="Your Shelf">
   <ion-nav-buttons side="left">
     <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
   </ion-nav-buttons>
   <ion-content class="has-header has-footer">
 
       <div class="list">
-          <span on-swipe-left="addToShelf($event,'{{book.identifier}}')"
+          <span
                 class="item item-thumbnail-left"
-                ng-repeat="book in homeModel.books | filterShelf">
+                ng-repeat="book in shelfModel.books">
               <img ng-src="{{book.thumbnail}}" />
               <h2>{{book.name}}</h2>
               <p>{{book.author}}</p>
@@ -15,9 +15,6 @@
       </div>
   </ion-content>
     <div class="bar bar-footer bar-balanced">
-        <div class="title">
-            <i class="icon ion-arrow-left-b"></i>
-            swipe left to add
-        </div>
+        <div class="title">swipe right to remove <i class="icon ion-arrow-right-b"></i></div>
     </div>
 </ion-view>

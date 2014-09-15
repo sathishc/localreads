@@ -1,8 +1,10 @@
 <ion-side-menus>
 
-  <ion-pane ion-side-menu-content>
+  <ion-pane ion-side-menu-content edge-drag-threshold="10">
     <ion-nav-bar class="bar-stable nav-title-slide-ios7">
-      <ion-nav-back-button class="button-clear"><i class="icon ion-ios7-arrow-back"></i> Back</ion-nav-back-button>
+      <!--<ion-nav-back-button class="button-clear">
+          <i class="icon ion-ios7-arrow-back"></i> Back
+      </ion-nav-back-button>-->
     </ion-nav-bar>
     <ion-nav-view name="menuContent" animation="slide-left-right"></ion-nav-view>
   </ion-pane>
@@ -14,28 +16,19 @@
     <ion-content class="has-header">
       <ion-list>
           <ion-item nav-clear menu-close href="#/app/home">
-              Home
+              Books Nearby
           </ion-item>
           <ion-item nav-clear menu-close href="#/app/search">
-              Search
-          </ion-item>
-          <ion-item nav-clear menu-close href="#/app/nearby">
-              Nearby
+              Add Books to Shelf
           </ion-item>
           <ion-item nav-clear menu-close href="#/app/shelf">
-              My Shelf
+              View Shelf
           </ion-item>
-          <ion-item nav-clear menu-close href="#/app/wishlist">
-              My Wishlist
+          <ion-item nav-clear menu-close href="#/app/inbox">
+              Inbox
           </ion-item>
           <ion-item nav-clear menu-close href="#/app/settings">
               Settings
-          </ion-item>
-          <ion-item nav-clear menu-close href="#/app/terms">
-              Terms
-          </ion-item>
-          <ion-item nav-clear menu-close href="#/app/privacy">
-              Privacy Policy
           </ion-item>
       </ion-list>
     </ion-content>

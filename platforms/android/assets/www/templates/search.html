@@ -1,8 +1,24 @@
-<ion-view title="Search">
-  <ion-nav-buttons side="left">
-    <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
-  </ion-nav-buttons>
+<ion-view title="Search for Books">
+    <ion-nav-buttons side="left">
+        <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+    </ion-nav-buttons>
   <ion-content class="has-header">
-    <h1>Search</h1>
+      <div class="bar bar-header item-input-inset">
+          <label class="item-input-wrapper">
+              <i class="icon ion-ios7-search placeholder-icon"></i>
+              <input type="search" placeholder="Title / Author / etc" ng-model="searchResultsModel.searchQuery">
+          </label>
+          <button class="button" ng-click="searchBooks()">
+              <i class="icon ion-search"></i>
+          </button>
+      </div>
+
+      <div class="list">
+          <span class="item item-thumbnail-left" ng-repeat="book in searchResultsModel.searchResults">
+              <img ng-src="{{book.volumeInfo.imageLinks.smallThumbnail}}" />
+              <h2>{{book.volumeInfo.title}}</h2>
+              <p>{{book.volumeInfo.authors[0]}}</p>
+          </span>
+      </div>
   </ion-content>
 </ion-view>

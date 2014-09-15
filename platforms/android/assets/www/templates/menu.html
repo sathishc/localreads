@@ -1,30 +1,44 @@
 <ion-side-menus>
 
-  <ion-pane ion-side-menu-content>
+  <ion-pane ion-side-menu-content edge-drag-threshold="10">
     <ion-nav-bar class="bar-stable nav-title-slide-ios7">
-      <ion-nav-back-button class="button-clear"><i class="icon ion-ios7-arrow-back"></i> Back</ion-nav-back-button>
+      <!--<ion-nav-back-button class="button-clear">
+          <i class="icon ion-ios7-arrow-back"></i> Back
+      </ion-nav-back-button>-->
     </ion-nav-bar>
     <ion-nav-view name="menuContent" animation="slide-left-right"></ion-nav-view>
   </ion-pane>
 
   <ion-side-menu side="left">
     <header class="bar bar-header bar-stable">
-      <h1 class="title">Left</h1>
+      <h1 class="title"></h1>
     </header>
     <ion-content class="has-header">
       <ion-list>
-        <ion-item nav-clear menu-close ng-click="login()">
-          Login
-        </ion-item>
-        <ion-item nav-clear menu-close href="#/app/search">
-          Search
-        </ion-item>
-        <ion-item nav-clear menu-close href="#/app/browse">
-          Browse
-        </ion-item>
-        <ion-item nav-clear menu-close href="#/app/playlists">
-          Playlists
-        </ion-item>
+          <ion-item nav-clear menu-close href="#/app/home">
+              Home
+          </ion-item>
+          <ion-item nav-clear menu-close href="#/app/search">
+              Search
+          </ion-item>
+          <ion-item nav-clear menu-close href="#/app/nearby">
+              Nearby
+          </ion-item>
+          <ion-item nav-clear menu-close href="#/app/shelf">
+              My Shelf
+          </ion-item>
+          <ion-item nav-clear menu-close href="#/app/wishlist">
+              My Wishlist
+          </ion-item>
+          <ion-item nav-clear menu-close href="#/app/settings">
+              Settings
+          </ion-item>
+          <ion-item nav-clear menu-close href="#/app/terms">
+              Terms
+          </ion-item>
+          <ion-item nav-clear menu-close href="#/app/privacy">
+              Privacy Policy
+          </ion-item>
       </ion-list>
     </ion-content>
   </ion-side-menu>
