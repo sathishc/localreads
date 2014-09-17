@@ -1,7 +1,8 @@
 'use strict';
 
 localReadControllers.controller('HomeCtrl', function($scope,$ionicPlatform,$ionicGesture,
-                                                     LocalReadsModelService,OwnershipsModel,HomeModel) {
+                                                     LocalReadsModelService,
+                                                     OwnershipsModel,HomeModel) {
 
     $scope.shelfModel = OwnershipsModel;
     $scope.homeModel = HomeModel;
@@ -13,8 +14,13 @@ localReadControllers.controller('HomeCtrl', function($scope,$ionicPlatform,$ioni
     };
 
 
-    $scope.addToShelf = function($event,data){
-        LocalReadsModelService.addToShelf(data);
+    $scope.addToShelf = function($event){
+        var volumeId = $event.currentTarget.id;
+        LocalReadsModelService.addToShelf(volumeId);
+    };
+
+    $scope.filterBooks = function(){
+        LocalReadsModelService.getLatestBooks();
     };
 
 

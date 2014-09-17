@@ -5,12 +5,13 @@
   <ion-content class="has-header has-footer">
 
       <div class="list">
-          <span
+          <span id = "{{ownership.id}}"
+                ng-dblclick="removeBook($event)"
                 class="item item-thumbnail-left"
-                ng-repeat="book in shelfModel.books">
-              <img ng-src="{{book.thumbnail}}" />
-              <h2>{{book.name}}</h2>
-              <p>{{book.author}}</p>
+                ng-repeat="ownership in shelfModel.ownerships">
+              <img ng-src="{{ownership.book.thumbnail}}" />
+              <h2>{{ownership.book.name}}</h2>
+              <p>{{ownership.book.author}}</p>
           </span>
       </div>
   </ion-content>

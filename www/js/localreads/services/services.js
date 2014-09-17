@@ -31,9 +31,16 @@ localreadsServices.factory('401Interceptor',
             },
             responseError: function(rejection) {
                 if(rejection.status == 401){
-
+                    //if this is a login url - set a message and return
+                    if(rejection.config.url.indexOf("/api/login")!= -1){
+                        UserModel.message = "Incorrect Username or Password";
+                    }
+                    else{ // emit an event to transition the page to login
+                        $rootScope.$emit("authFailed");
+                    }
+                }else{
+                    UserModel.message = "Error connecting to server";
                     $rootScope.$emit("authFailed");
-                    console.log("Emitting authFailed ");
                 }
                 return $q.reject(rejection);
             }
@@ -43,6 +50,17 @@ localreadsServices.factory('401Interceptor',
 localreadsServices.config(['$httpProvider', function($httpProvider) {
     $httpProvider.interceptors.push('401Interceptor');
 }]);
+
+localreadsServices.directive('backImg', function(){
+    return function(scope, element, attrs){
+        attrs.$observe('backImg', function(value) {
+            element.css({
+                'background-image': 'url(' + value +')',
+                'background-size' : 'cover'
+            });
+        });
+    };
+});
 
 
 

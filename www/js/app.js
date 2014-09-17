@@ -22,9 +22,9 @@ angular.module('localreads',
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
-      // populate data
-      LocalReadsModelService.getOwnedBooks();
-      LocalReadsModelService.getLatestBooks();
+
+      //bootstrap the data
+      LocalReadsModelService.bootstrap();
 
   });
 })

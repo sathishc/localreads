@@ -1,8 +1,9 @@
 // spec.js
-describe('LocalReads Start Page', function() {
+describe('Start Page', function() {
 
     beforeEach(function(){
-        browser.get("http://localhost:8100/")
+        browser.get("http://localhost:8100/");
+        browser.sleep(3000);
     });
 
     it('should first load the login url', function() {

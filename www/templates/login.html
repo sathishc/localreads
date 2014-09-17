@@ -1,15 +1,14 @@
 <ion-view title="LocalReads Login">
-    <ion-content class="has-header has-footer">
-
-            <form>
+    <ion-content class="has-header has-footer" back-img="img/bookstack.jpg">
+            <form class="css-form card">
                 <div class="list">
                     <label class="item item-input">
-                        <span class="input-label">Username</span>
-                        <input type="text" ng-model="userModel.userName">
+                        <span class="input-label">Email Id</span>
+                        <input type="email" name="email" ng-model="userModel.userName">
                     </label>
                     <label class="item item-input">
                         <span class="input-label">Password</span>
-                        <input type="password" ng-model="userModel.password">
+                        <input type="password" ng-model="userModel.password" ng-minlength="6">
                     </label>
                     <label class="item">
                         <button id="loginButton" class="button button-block button-positive" type="button" ng-click="login()">
@@ -21,18 +20,13 @@
                             Register
                         </button>
                     </label>
-                    <div class="card">
-                        <div align="center" class="item item-text-wrap">
-                            {{userModel.message}}
-                        </div>
+                    <div align="center" class="error-container">
+                        {{userModel.message}}
                     </div>
-
-
                 </div>
             </form>
-
     </ion-content>
-    <div class="bar bar-footer">
+    <div class="bar bar-footer bar-dark">
         <h6 class="title">Copyright 2014 SquarePrism</h6>
     </div>
 </ion-view>

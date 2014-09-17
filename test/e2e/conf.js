@@ -4,7 +4,7 @@ exports.config = {
     capabilities: {
         'browserName': 'chrome',
         'chromeOptions': {
-            'args': ['incognito', 'disable-extensions', 'start-maximized', 'enable-crash-reporter-for-testing']
+            'args': ['disable-extensions','enable-crash-reporter-for-testing']
         },
         'loggingPrefs': {
             'browser': 'ALL'
@@ -14,6 +14,7 @@ exports.config = {
         'home/startPageSpec.js',
         'home/loginPageSpec.js',
         'addBooks/addBooksPageSpec.js',
+        'settings/settingsPageSpec.js'
     ],
     jasmineNodeOpts: {
         showColors: true,

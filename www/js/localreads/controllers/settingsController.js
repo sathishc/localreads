@@ -1,14 +1,11 @@
 'use strict';
 
-localReadControllers.controller('SettingsCtrl', function($scope, UserModel) {
+localReadControllers.controller('SettingsCtrl', function($scope, UserModel, LocalReadsModelService) {
 
     $scope.userModel = UserModel;
 
-    $scope.setHomeLocation = function(){
-
-    };
 
     $scope.save = function(){
-
+        LocalReadsModelService.updateUserInfo();
     };
 });

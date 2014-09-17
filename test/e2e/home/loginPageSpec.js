@@ -1,24 +1,95 @@
 // spec.js
-describe('LocalReads Login Page', function() {
+describe('Login Page', function() {
 
-    beforeEach(function(){
-        browser.get('http://localhost:8100/#/app/login')
+    var LoginHomepage = function() {
+        this.nameInput = element(by.model('userModel.userName'));
+        this.passwordInput = element(by.model('userModel.password'));
+        this.loginButton =  element(by.id('loginButton'));
+        this.errorMessage =  element(by.binding("userModel.message"));
+
+        this.books = element.all(by.repeater('book in homeModel.books'));
+
+        this.get = function() {
+            browser.get('http://localhost:8100/#/app/login');
+            browser.sleep(1000);
+        };
+
+        this.setUserName = function(name) {
+            this.nameInput.clear();
+            this.nameInput.sendKeys(name);
+        };
+
+        this.setPassword = function(password) {
+            this.passwordInput.clear();
+            this.passwordInput.sendKeys(password);
+        };
+
+        this.loginButtonClickAndDelay = function() {
+            this.loginButton.click();
+            browser.sleep(5000);
+        };
+
+        this.pageTitle = function(){
+            return browser.getTitle();
+        }
+    };
+
+    var loginHomePage;
+
+    it('should show login page on load', function() {
+
+        loginHomePage = new LoginHomepage();
+        loginHomePage.get();
+        expect(loginHomePage.pageTitle()).toEqual('http://localhost:8100/#/app/login');
     });
 
 
-    it('should load the home url after login', function() {
+    it('should show error message trying to login without user/pass', function() {
 
-        element(by.model('userModel.userName')).sendKeys("user@foo.com");
-        element(by.model('userModel.password')).sendKeys("pass");
-
-        element(by.id('loginButton')).click();
-
-        browser.sleep(1000);
+        loginHomePage.loginButtonClickAndDelay();
+        expect(loginHomePage.errorMessage.getText()).toEqual("Invalid Username. Should be a valid email id");
+    });
 
 
-        var books = element.all(by.repeater('book in homeModel.books'));
+    it('should show error message with blank Username', function() {
 
-        expect(browser.getTitle()).toEqual('http://localhost:8100/#/app/home');
-        expect(books.count()).toEqual(2);
+
+        loginHomePage.setUserName("");
+        loginHomePage.setPassword("pass");
+        loginHomePage.loginButtonClickAndDelay();
+
+        expect(loginHomePage.errorMessage.getText()).toEqual("Invalid Username. Should be a valid email id");
+    });
+
+    it('should show error message with blank Password', function() {
+
+
+        loginHomePage.setUserName("user@foo.com");
+        loginHomePage.setPassword("");
+        loginHomePage.loginButtonClickAndDelay();
+
+        expect(loginHomePage.errorMessage.getText()).toEqual("Invalid password. Should have at least 6 characters");
+    });
+
+    it('should load show error message after invalid login', function() {
+
+
+        loginHomePage.setUserName("user@foo.com");
+        loginHomePage.setPassword("passwdInvalid");
+        loginHomePage.loginButtonClickAndDelay();
+
+        expect(loginHomePage.errorMessage.getText()).toEqual("Incorrect Username or Password");
+    });
+
+    it('should load the home url and content after valid login', function() {
+
+
+        loginHomePage.setUserName("user@moo.com");
+        loginHomePage.setPassword("password");
+        loginHomePage.loginButtonClickAndDelay();
+
+        browser.sleep(3000);
+        expect(loginHomePage.pageTitle()).toEqual('http://localhost:8100/#/app/home');
+        expect(loginHomePage.books.count()).toNotEqual(0);
     });
 });

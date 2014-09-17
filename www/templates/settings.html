@@ -4,34 +4,28 @@
   </ion-nav-buttons>
   <ion-content class="has-header has-footer">
       <form>
+          <label class="item item-input">
+              <span class="input-label">Username</span>
+              <input type="text" ng-model="userModel.user.username" disabled>
+          </label>
+          <label class="item range range-positive">
+              <span class="input-label">Search Radius: {{userModel.user.settings.searchRadius}}</span>
+              <input type="range" ng-model="userModel.user.settings.searchRadius" name="volume" min="1" max="25" value="2">
+          </label>
 
-              <label class="item item-input">
-                  <span class="input-label">Username</span>
-                  <input type="text" ng-model="userModel.userName" disabled>
-              </label>
-              <label class="item range range-positive">
-                  <span class="input-label">Search Radius: {{userModel.searchRadius}}</span>
-                  <input type="range" ng-model="userModel.searchRadius" name="volume" min="1" max="25" value="2">
-              </label>
-              <label class="item">
-                  <button class="button button-block button-balanced" type="button" ng-click="save()">
-                      Save
-                  </button>
-              </label>
-              <label class="item item-input">
-                  <span class="input-label">Latitude : {{userModel.latitude}}</span>
-              </label>
-              <label class="item item-input">
-                  <span class="input-label">Longitude : {{userModel.longitude}}</span>
-              </label>
-
-              <label class="item">
-                  <button class="button button-block button-positive" type="button" ng-click="setHoneLocation()">
-                      Set Home to Current Location
-                  </button>
-              </label>
-
-
+          <label class="item item-input">
+              <span class="input-label">Latitude :</span>
+              <input type="number" ng-model="userModel.user.location.y">
+          </label>
+          <label class="item item-input">
+              <span class="input-label">Longitude :</span>
+              <input type="number" ng-model="userModel.user.location.x">
+          </label>
+          <label class="item">
+              <button id="settingsSaveButton" class="button button-block button-balanced" type="button" ng-click="save()">
+                  Save
+              </button>
+          </label>
       </form>
   </ion-content>
     <div class="bar bar-footer bar-balanced">

@@ -1,31 +1,44 @@
 // spec.js
-describe('LocalReads Add Books Page', function() {
+describe('Add Books Page', function() {
 
-    beforeEach(function(){
-        browser.get('http://localhost:8100/#/app/search');
-    });
+    var AddBooksHomepage = function() {
 
+        this.searchBox = element(by.id('searchTextField'));
+        this.searchButton = element(by.id('searchButton'));
+        this.searchResults = element.all(by.repeater("book in searchResultsModel.searchResults"));
+
+        this.setSearchBox = function(text){
+            this.searchBox.clear();
+            this.searchBox.sendKeys(text);
+        };
+
+        this.searchButtonClick = function(){
+            this.searchButton.click();
+            browser.sleep(8000);
+        };
+
+        this.get = function() {
+            browser.get('http://localhost:8100/#/app/search');
+            browser.sleep(5000);
+        };
+    };
+
+    var addBooksHomePage;
 
     it('should load the add books url', function() {
+
+        addBooksHomePage = new AddBooksHomepage();
+        addBooksHomePage.get();
 
         expect(browser.getTitle()).toEqual('http://localhost:8100/#/app/search');
     });
 
     it('should search and find 40 books', function() {
 
-        browser.sleep(1000);
+        addBooksHomePage.setSearchBox("Javascript");
+        addBooksHomePage.searchButtonClick();
 
-        var searchBox = element(by.id('searchTextField'));
-        var searchButton = element(by.id('searchButton'));
-
-        searchBox.sendKeys("Javascript");
-        searchButton.click();
-
-        browser.sleep(2000);
-
-        var results = element.all(by.repeater("book in searchResultsModel.searchResults"));
-        expect(results.count()).toEqual(40);
-
+        expect(addBooksHomePage.searchResults.count()).toEqual(40);
     });
 
 

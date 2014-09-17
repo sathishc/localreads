@@ -4,18 +4,14 @@ angular.module('localreads.models', ['ngStorage'])
 
 .factory('UserModel', function($localStorage) {
     //TODO revert to use localstorage after testing
-    return {
-        userName:"",
-        password:"",
-        searchRadius:"",
-        latitude:51.5,
-        longitude:0.0,
-        token:"",
-        message:"",
-        signedUp:false,
+    var user,token;
+    return $localStorage.$default({
+        user:user,
+        token:token,
         restBaseUrl:"http://localhost:8080/"
-    };
+    });
     /*return $localStorage.$default({
+        id:"",
         userName:"",
         password:"",
         searchRadius:"",
@@ -31,8 +27,10 @@ angular.module('localreads.models', ['ngStorage'])
 
 .factory('HomeModel', function() {
     var books = [];
+    var searchFilter = "";
     return {
-        books:books
+        books:books,
+        searchFilter:searchFilter
     };
 })
 

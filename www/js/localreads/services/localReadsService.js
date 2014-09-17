@@ -15,9 +15,8 @@ localreadsServices.service('LocalReadsService',
     ['$rootScope','$http','$q','UserModel',
         function($rootScope,$http,$q,UserModel){
 
-            //var booksData;
-            var booksDataLoaded = false;
             var restBaseUrl = UserModel.restBaseUrl;
+
             return{
                 login:function(userName,password){
 
@@ -27,23 +26,39 @@ localreadsServices.service('LocalReadsService',
                     };
                     return getLoginResponse('POST','api/login',params,params);
                 },
+                getUserInfo:function(userId){
+
+                    return getHttpResponse('GET','api/users/' + userId);
+                },
+                updateUserInfo:function(userId){
+                    var params = {
+                        latitude:UserModel.user.location.y,
+                        longitude:UserModel.user.location.x,
+                        searchRadius:UserModel.user.settings.searchRadius
+                    };
+
+                    return getHttpResponse('POST','api/users/',params);
+                },
                 logout:function(){
 
-                    return getLoginResponse('POST','api/logout');
+                    return getHttpResponse('POST','api/logout');
                 },
                 signup:function(userName,password){
                     var params = {
                         username:userName,
                         password:password,
-                        latitude:"13.9",
+                        latitude:13.9,
                         longitude:75.5};
                     return getHttpResponse('POST','register/add',params,params);
                 },
-                getBooks:function(){
-                    return getHttpResponse('GET','api/books')
+                getBooksNearby:function(searchFilter){
+                    return getHttpResponse('GET','api/ownerships/search/' + searchFilter);
                 },
                 addBookToShelf:function(volumeId){
                     return getHttpResponse('GET','api/ownerships/create/' + volumeId);
+                },
+                removeBookFromShelf:function(volumeId){
+                    return getHttpResponse('DELETE','api/ownerships/' + volumeId);
                 },
                 getOwnerships:function(volumeId){
                     return getHttpResponse('GET','api/ownerships/');

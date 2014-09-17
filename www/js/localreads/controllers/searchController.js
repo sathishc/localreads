@@ -7,8 +7,9 @@ localReadControllers.controller('SearchCtrl', function($scope,
 
         $scope.searchResultsModel = SearchResultsModel;
 
-        $scope.addToShelf = function($event,data){
-            LocalReadsModelService.addToShelf(data);
+        $scope.addToShelf = function($event){
+            var volumeId = $event.currentTarget.id;
+            LocalReadsModelService.addToShelf(volumeId);
         };
 
         $scope.searchBooks = function(){
