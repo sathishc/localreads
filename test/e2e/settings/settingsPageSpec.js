@@ -2,41 +2,34 @@
 describe('Settings Page', function() {
 
     var SettingsPage = function() {
-
-        this.settingsSearchRadius = element(by.binding('userModel.searchRadius'));
-        this.settingsLatitude = element(by.model('userModel.latitude'));
-        this.settingsLongitude = element(by.model('userModel.longitude'));
+        this.settingsSearchRadius = element(by.model('settingsModel.user.searchRadius'));
+        this.settingsLatitude = element(by.model('settingsModel.user.latitude'));
+        this.settingsLongitude = element(by.model('settingsModel.user.longitude'));
         this.saveButton = element(by.id('settingsSaveButton'));
 
 
-        this.setSearchRadius = function(text){
-            this.settingsSearchRadius.clear();
-            this.settingsSearchRadius.sendKeys(text);
-        };
-
-        this.setLatitude = function(text){
+        this.setLatitude = function(latitude){
             this.settingsLatitude.clear();
-            this.settingsLatitude.sendKeys(text);
+            this.settingsLatitude.sendKeys(latitude);
         };
 
-        this.setLongitude = function(text){
+        this.setLongitude = function(longitude){
             this.settingsLongitude.clear();
-            this.settingsLongitude.sendKeys(text);
+            this.settingsLongitude.sendKeys(longitude);
         };
 
         this.saveButtonClick = function(){
             this.saveButton.click();
-            browser.sleep(8000);
+            browser.sleep(1000);
         };
 
         this.get = function() {
             browser.get('http://localhost:8100/#/app/settings');
             browser.sleep(5000);
+
         };
     };
-
     var settingsPage;
-
 
     it('should load the settings page url', function() {
         settingsPage = new SettingsPage();
@@ -45,22 +38,21 @@ describe('Settings Page', function() {
         expect(browser.getTitle()).toEqual('http://localhost:8100/#/app/settings');
     });
 
-    it('should save the changed search radius', function() {
-        this.settingsSearchRadius(10);
-        this.saveButtonClick();
+    it('should save the changed latitude and longitude', function() {
+
+        settingsPage.setLatitude(10.5);
+        settingsPage.setLongitude(70.5);
+        settingsPage.saveButtonClick();
+
 
         browser.refresh();
-        browser.sleep(1000);
+        browser.sleep(3000);
 
-        expect(this.settingsSearchRadius).toBe(10);
 
-        this.settingsSearchRadius(5);
-        this.saveButtonClick();
+        expect(settingsPage.settingsLatitude.getAttribute('value')).toEqual('10.5');
+        expect(settingsPage.settingsLongitude.getAttribute('value')).toEqual('70.5');
 
-        browser.refresh();
-        browser.sleep(1000);
 
-        expect(this.settingsSearchRadius).toBe(5);
     });
 
 });

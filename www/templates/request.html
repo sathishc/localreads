@@ -1,0 +1,48 @@
+<ion-view title="Books Nearby">
+  <ion-nav-buttons side="left">
+    <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+  </ion-nav-buttons>
+  <ion-content class="has-header has-footer" scroll="false">
+          <div class="list">
+              <span id="{{requestModel.activeBook.identifier}}"
+                    class="item item-thumbnail-left">
+                  <img ng-src="{{requestModel.activeBook.thumbnail}}" />
+                  <h2>{{requestModel.activeBook.name}}</h2>
+                  <p>{{requestModel.activeBook.author}}</p>
+                  <p>belongs to {{requestModel.activeUserId}}</p>
+              </span>
+
+              <form>
+                  <div class="list list-inset">
+                      <label class="item item-input item-text-wrap">
+                         <small>
+                          Hi, I am interested in borrowing the book
+                          <b>{{requestModel.activeBook.name}}</b> from you
+                         </small>
+                      </label>
+                      <label class="item item-input">
+                          <input type="text"
+                                 ng-model="requestModel.userMessage"
+                                 placeholder="Add details about yourself">
+                      </label>
+                      <label class="item">
+                          <button id="sendRequestButton"
+                                  ng-disabled="!(requestModel.userMessage.length >= 3)"
+                                  class="button button-block button-balanced"
+                                  type="button" ng-click="requestModel.sendMessage()">
+                              Send Request
+                          </button>
+                      </label>
+                  </div>
+              </form>
+
+
+          </div>
+  </ion-content>
+    <div class="bar bar-footer bar-balanced">
+        <div class="title">
+            <i class="icon ion-arrow-left-b"></i>
+            swipe left to add
+        </div>
+    </div>
+</ion-view>

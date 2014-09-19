@@ -5,7 +5,6 @@
   <ion-content class="has-header has-footer" scroll="false">
       <div class="bar bar-header item-input-inset">
           <label class="item-input-wrapper">
-              <i class="icon ion-ios7-search placeholder-icon"></i>
               <input id="filterTextField"
                      type="search"
                      placeholder="Filter (3 characters minimum)"
@@ -17,14 +16,13 @@
       </div>
       <ion-content class="has-header">
           <div class="list">
-              <span id="{{book.identifier}}"
-                    on-swipe-left="addToShelf($event)"
-                    ng-dblclick="addToShelf($event)"
+              <span on-swipe-left="addToShelf($event,ownership)"
+                    ng-dblclick="initiateRequest($event,ownership)"
                     class="item item-thumbnail-left"
-                    ng-repeat="book in homeModel.books | filterShelf">
-                  <img ng-src="{{book.thumbnail}}" />
-                  <h2>{{book.name}}</h2>
-                  <p>{{book.author}}</p>
+                    ng-repeat="ownership in homeModel.ownerships | filterShelf">
+                  <img ng-src="{{ownership.book.thumbnail}}" />
+                  <h2>{{ownership.book.name}}</h2>
+                  <p>{{ownership.book.author}}</p>
               </span>
           </div>
       </ion-content>

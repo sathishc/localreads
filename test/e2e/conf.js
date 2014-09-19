@@ -8,12 +8,16 @@ exports.config = {
         },
         'loggingPrefs': {
             'browser': 'ALL'
-        }
+        },
+        webStorage:false
     },
     specs: [
         'home/startPageSpec.js',
         'home/loginPageSpec.js',
-        'addBooks/addBooksPageSpec.js',
+        'shelf/shelfPageSpec.js',
+        'inbox/conversationPageSpec.js',
+        'inbox/inboxPageSpec.js',
+        'inbox/requestBookPageSpec.js',
         'settings/settingsPageSpec.js'
     ],
     jasmineNodeOpts: {

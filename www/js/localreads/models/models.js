@@ -5,34 +5,56 @@ angular.module('localreads.models', ['ngStorage'])
 .factory('UserModel', function($localStorage) {
     //TODO revert to use localstorage after testing
     var user,token;
+    /*return {
+        user:user,
+        token:token,
+        restBaseUrl:"http://localhost:8080/"
+    };*/
     return $localStorage.$default({
         user:user,
         token:token,
         restBaseUrl:"http://localhost:8080/"
     });
-    /*return $localStorage.$default({
-        id:"",
-        userName:"",
-        password:"",
-        searchRadius:"",
-        latitude:51.5,
-        longitude:0.0,
-        token:"",
-        message:"",
-        signedUp:false,
-        restBaseUrl:"http://localhost:8080/"
-    });*/
+
 })
 
 
 .factory('HomeModel', function() {
-    var books = [];
+    var ownerships = [];
     var searchFilter = "";
     return {
-        books:books,
+        ownerships:ownerships,
         searchFilter:searchFilter
     };
 })
+
+.factory('RequestModel', function() {
+    var activeBook;
+    var activeUserId;
+    var userMessage;
+    return {
+        activeBook:activeBook,
+        activeUserId:activeUserId,
+        userMessage:userMessage
+    };
+})
+
+.factory('InboxModel', function() {
+    var conversations = [];
+    return {
+        conversations:conversations
+    };
+})
+
+.factory('ConversationModel', function() {
+    var activeConversation;
+    var activeMessage;
+    return {
+        activeConversation:activeConversation,
+        activeMessage:activeMessage
+    };
+})
+
 
 .factory('OwnershipsModel', function() {
     var ownerships = [];

@@ -2,7 +2,7 @@
 
 localReadControllers.controller('SettingsCtrl', function($scope, UserModel, LocalReadsModelService) {
 
-    $scope.userModel = UserModel;
+    $scope.settingsModel = UserModel;
 
 
     $scope.save = function(){

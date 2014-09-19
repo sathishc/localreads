@@ -7,7 +7,7 @@ describe('Login Page', function() {
         this.loginButton =  element(by.id('loginButton'));
         this.errorMessage =  element(by.binding("userModel.message"));
 
-        this.books = element.all(by.repeater('book in homeModel.books'));
+        this.books = element.all(by.repeater('ownership in homeModel.ownerships'));
 
         this.get = function() {
             browser.get('http://localhost:8100/#/app/login');
@@ -84,11 +84,11 @@ describe('Login Page', function() {
     it('should load the home url and content after valid login', function() {
 
 
-        loginHomePage.setUserName("user@moo.com");
+        loginHomePage.setUserName("user@foo.com");
         loginHomePage.setPassword("password");
         loginHomePage.loginButtonClickAndDelay();
 
-        browser.sleep(3000);
+        browser.sleep(5000);
         expect(loginHomePage.pageTitle()).toEqual('http://localhost:8100/#/app/home');
         expect(loginHomePage.books.count()).toNotEqual(0);
     });

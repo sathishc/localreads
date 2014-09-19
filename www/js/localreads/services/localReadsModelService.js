@@ -13,10 +13,10 @@
 
 localreadsServices.service('LocalReadsModelService',
     ['$rootScope','$q','$filter',
-        'UserModel','OwnershipsModel','HomeModel',
+        'UserModel','OwnershipsModel','HomeModel','InboxModel',
         'LocalReadsService',
         function($rootScope,$q,$filter,
-                 UserModel,OwnershipsModel,HomeModel,
+                 UserModel,OwnershipsModel,HomeModel,InboxModel,
                  LocalReadsService){
 
 
@@ -31,18 +31,23 @@ localreadsServices.service('LocalReadsModelService',
                        if(response){
                            self.getLatestBooks();
                            self.getOwnedBooks();
+                           self.getConversations();
                        }
                     });
 
+                },
+                logout:function(){
+                    LocalReadsService.logout();
                 },
                 getUserInfo:function(){
                     var responseData = $q.defer();
                         LocalReadsService.getUserInfo(UserModel.userName)
                         .then(function(response){
-                                UserModel.user = response;
+                                console.log(response);
+                                UserModel.user = response.user;
                                 responseData.resolve(true);
                         },(function(error){
-                            console.log("Error in getting books")
+                            console.log("Error in getting User");
                                 responseData.resolve(false);
                         }));
                     return responseData.promise;
@@ -52,11 +57,11 @@ localreadsServices.service('LocalReadsModelService',
                     LocalReadsService.updateUserInfo()
                         .then(function(response){
                             if(response.status){
-                                UserModel.user = response.user
+                                UserModel.user.latitude = response.user.latitude;
+                                UserModel.user.longitude = response.user.longitude;
+                                UserModel.user.searchRadius = response.user.searchRadius;
                             }
                         });
-
-
                 },
 
 
@@ -68,7 +73,7 @@ localreadsServices.service('LocalReadsModelService',
                     LocalReadsService.getBooksNearby(searchQuery)
                         .then(function(response){
                             if(response.status){
-                                HomeModel.books = response.books;
+                                HomeModel.ownerships = response.ownerships;
                             }
                         },(function(error){
                             console.log("Error in getting books")
@@ -112,6 +117,62 @@ localreadsServices.service('LocalReadsModelService',
                         },(function(error){
                             console.log("Error in getting ownerships");
                         }));
+                },
+
+                sendBookRequest:function(userId,messageText){
+                    LocalReadsService.sendBookRequest(userId,messageText)
+                        .then(function(response){
+                            if(response.status) { // status needs to be true from server
+                                //InboxModel.conversations.push(response.conversation);
+
+                                //should add snippet to a conversation if it already exists
+                                var existing = _.find(InboxModel.conversations,function(conversation){
+                                    return conversation.id == response.conversation.id;
+                                });
+                                if(existing){
+                                    //replace the existing snippets with new ones
+                                    existing.snippets = response.conversation.snippets;
+                                }else{
+                                    //push this as a new conversation
+                                    InboxModel.conversations.push(response.conversation);
+                                }
+
+                            }
+                        },(function(error){
+                            console.log("Error in getting ownerships");
+                        }));
+                },
+
+                sendComment:function(conversationId,messageText){
+                    LocalReadsService.updateConversation(conversationId,messageText)
+                        .then(function(response){
+                            if(response.status) { // status needs to be true from server
+
+                                //should add snippet to a conversation if it already exists
+                                var existing = _.find(InboxModel.conversations,function(conversation){
+                                    return conversation.id == response.conversation.id;
+                                });
+
+                                if(existing){
+                                    //replace the existing snippets with new ones
+                                    existing.snippets = response.conversation.snippets;
+                                }
+
+                            }
+                        },(function(error){
+                            console.log("Error in getting ownerships");
+                        }));
+                },
+
+                getConversations:function(){
+                    LocalReadsService.getConversations()
+                        .then(function(response){
+                            if(response.status) { // status needs to be true from server
+                                InboxModel.conversations = response.conversations;
+                            }
+                        },(function(error){
+                            console.log("Error in getting ownerships");
+                        }));
                 }
             };
 
@@ -119,22 +180,23 @@ localreadsServices.service('LocalReadsModelService',
         }]);
 
 
+//filter out books that are in your shelf from the books nearby (in Home)
 localreadsServices.filter('filterShelf', function (OwnershipsModel) {
-    return function (books) {
-        return _.filter(books,function(book){
+    return function (ownerships) {
+        return _.filter(ownerships,function(ownership){
             // return those books that dont contain their ids in the shelf
             return !_.contains(
                 //map the Shelf books to their ids
                 _.map(OwnershipsModel.ownerships,function(ownership){
                     return ownership.book.identifier;
-                }),book.identifier);
+                }),ownership.book.identifier);
         });
     };
 });
 
+//filter out books that are in your shelf from search results in AddBooks page
 localreadsServices.filter('filterSearch', function (OwnershipsModel) {
     return function (books) {
-
         return _.filter(books,function(book){
             // return those books that dont contain their ids in the shelf
             return !_.contains(

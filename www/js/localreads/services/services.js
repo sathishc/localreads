@@ -30,12 +30,17 @@ localreadsServices.factory('401Interceptor',
                 return config;
             },
             responseError: function(rejection) {
+
+
                 if(rejection.status == 401){
                     //if this is a login url - set a message and return
                     if(rejection.config.url.indexOf("/api/login")!= -1){
                         UserModel.message = "Incorrect Username or Password";
                     }
                     else{ // emit an event to transition the page to login
+                        console.log("Auth failed for");
+                        console.log(rejection.config.url);
+
                         $rootScope.$emit("authFailed");
                     }
                 }else{

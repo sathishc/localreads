@@ -11,22 +11,28 @@ angular.module('localreads',
         'localreads.models',
         'localreads.services'])
 
-.run(function($ionicPlatform,LocalReadsModelService) {
-  $ionicPlatform.ready(function() {
-    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-    // for form inputs)
-    if(window.cordova && window.cordova.plugins.Keyboard) {
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-    }
-    if(window.StatusBar) {
-      // org.apache.cordova.statusbar required
-      StatusBar.styleDefault();
-    }
+.run(function($ionicPlatform,$rootScope,$state, LocalReadsModelService) {
+      $ionicPlatform.ready(function() {
 
-      //bootstrap the data
-      LocalReadsModelService.bootstrap();
+            // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+            // for form inputs)
+            if(window.cordova && window.cordova.plugins.Keyboard) {
+              cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+            }
+            if(window.StatusBar) {
+              // org.apache.cordova.statusbar required
+              StatusBar.styleDefault();
+            }
 
-  });
+          //bootstrap the data
+          LocalReadsModelService.bootstrap();
+
+      });
+
+      $rootScope.$on('authFailed',function(event){
+            console.log("received autFailed");
+            $state.go('app.login');
+      });
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
@@ -49,6 +55,7 @@ angular.module('localreads',
             }
         })
 
+
         .state('app.home', { // display nearby books
           url: "/home",
           views: {
@@ -57,6 +64,26 @@ angular.module('localreads',
               controller: 'HomeCtrl'
             }
           }
+        })
+
+        .state('app.request', { // display nearby books
+            url: "/request",
+            views: {
+                'menuContent' :{
+                    templateUrl: "templates/request.html",
+                    controller: 'RequestCtrl'
+                }
+            }
+        })
+
+        .state('app.conversation', { // display nearby books
+            url: "/conversation",
+            views: {
+                'menuContent' :{
+                    templateUrl: "templates/conversation.html",
+                    controller: 'ConversationCtrl'
+                }
+            }
         })
 
         .state('app.search', {  //search to add books

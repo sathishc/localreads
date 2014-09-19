@@ -3,12 +3,12 @@
         <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
     </ion-nav-buttons>
     <ion-content class="has-header has-footer">
-
         <div class="list">
-          <span on-swipe-left="addToShelf($event,'{{book.identifier}}')"
-                class="item item-thumbnail-left"
-                ng-repeat="conversation in inboxModel.conversation>
-              <p>{{conversation.from}}</p>
+          <span class="item item-text-wrap"
+                ng-dblclick="inboxModel.openConversation(conversation)"
+                ng-repeat="conversation in inboxModel.conversations">
+              <h4>{{conversation.receiverName}}</h4>
+              <p>{{conversation.snippets[conversation.snippets.length-1].message}}</p>
           </span>
         </div>
     </ion-content>

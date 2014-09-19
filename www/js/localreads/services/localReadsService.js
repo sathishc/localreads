@@ -27,20 +27,18 @@ localreadsServices.service('LocalReadsService',
                     return getLoginResponse('POST','api/login',params,params);
                 },
                 getUserInfo:function(userId){
-
                     return getHttpResponse('GET','api/users/' + userId);
                 },
                 updateUserInfo:function(userId){
                     var params = {
-                        latitude:UserModel.user.location.y,
-                        longitude:UserModel.user.location.x,
-                        searchRadius:UserModel.user.settings.searchRadius
+                        latitude:UserModel.user.latitude,
+                        longitude:UserModel.user.longitude,
+                        searchRadius:UserModel.user.searchRadius
                     };
 
                     return getHttpResponse('POST','api/users/',params);
                 },
                 logout:function(){
-
                     return getHttpResponse('POST','api/logout');
                 },
                 signup:function(userName,password){
@@ -62,6 +60,30 @@ localreadsServices.service('LocalReadsService',
                 },
                 getOwnerships:function(volumeId){
                     return getHttpResponse('GET','api/ownerships/');
+                },
+                sendBookRequest:function(userId,messageText){
+                    var params = {
+                        withUserId:userId,
+                        messageText:messageText
+                        };
+                    return getHttpResponse('GET','api/conversations/create',params);
+                },
+                getConversations:function(){
+                    return getHttpResponse('GET','api/conversations/');
+                },
+                getConversation:function(conversationId){
+                    return getHttpResponse('GET','api/conversations/' + conversationId);
+                },
+                updateConversation:function(conversationId,messageText){
+                    var params = {
+                        id:conversationId,
+                        message:messageText
+                    };
+                    return getHttpResponse('POST','api/conversations/',params);
+                },
+                deleteConversation:function(conversationId){
+
+                    return getHttpResponse('DELETE','api/conversations/' + conversationId);
                 }
             };
 
