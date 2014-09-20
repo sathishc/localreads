@@ -1,0 +1,34 @@
+<ion-view title="Local Reads">
+  <ion-nav-buttons side="left">
+    <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+  </ion-nav-buttons>
+  <ion-content class="has-header has-footer">
+      <form>
+          <label class="item item-input">
+              <span class="input-label">Username</span>
+              <input type="text" ng-model="settingsModel.user.userName" disabled />
+          </label>
+          <label class="item range range-positive">
+              <span class="input-label">Search Radius: {{settingsModel.user.searchRadius}}</span>
+              <input type="range" ng-model="settingsModel.user.searchRadius" name="volume" min="1" max="25" value="2" />
+          </label>
+
+          <label class="item item-input">
+              <span class="input-label">Latitude :</span>
+              <input type="number" ng-model="settingsModel.user.latitude" />
+          </label>
+          <label class="item item-input">
+              <span class="input-label">Longitude :</span>
+              <input type="number" ng-model="settingsModel.user.longitude" />
+          </label>
+          <label class="item">
+              <button id="settingsSaveButton" class="button button-block button-balanced" type="button" ng-click="save()">
+                  Save
+              </button>
+          </label>
+      </form>
+  </ion-content>
+    <div class="bar bar-footer bar-balanced">
+        <div class="title"></div>
+    </div>
+</ion-view>

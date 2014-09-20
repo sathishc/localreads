@@ -1,0 +1,21 @@
+<ion-view title="Your Shelf">
+  <ion-nav-buttons side="left">
+    <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+  </ion-nav-buttons>
+  <ion-content class="has-header has-footer">
+
+      <div class="list">
+          <span id = "{{ownership.id}}"
+                ng-dblclick="removeBook($event)"
+                class="item item-thumbnail-left"
+                ng-repeat="ownership in shelfModel.ownerships">
+              <img ng-src="{{ownership.book.thumbnail}}" />
+              <h2>{{ownership.book.name}}</h2>
+              <p>{{ownership.book.author}}</p>
+          </span>
+      </div>
+  </ion-content>
+    <div class="bar bar-footer bar-balanced">
+        <div class="title">swipe right to remove <i class="icon ion-arrow-right-b"></i></div>
+    </div>
+</ion-view>

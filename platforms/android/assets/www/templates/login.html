@@ -1,36 +1,33 @@
 <ion-view title="LocalReads Login">
-    <ion-content class="has-header has-footer">
-        <div class="list card">
-            <form>
+    <ion-content class="has-header has-footer" back-img="img/bookstack.jpg">
+            <form class="css-form card">
                 <div class="list">
                     <label class="item item-input">
-                        <span class="input-label">Username</span>
-                        <input type="text" ng-model="userModel.userName">
+                        <span class="input-label">Email Id</span>
+                        <input type="email" name="email" ng-model="userModel.userName">
                     </label>
                     <label class="item item-input">
                         <span class="input-label">Password</span>
-                        <input type="password" ng-model="userModel.password">
+                        <input type="password" ng-model="userModel.password" ng-minlength="6">
                     </label>
                     <label class="item">
-                        <button class="button button-block button-positive" type="button" ng-click="userModel.login()">
+                        <button id="loginButton" class="button button-block button-positive" type="button" ng-click="login()">
                             Log in
                         </button>
                     </label>
                     <label class="item">
-                        <button class="button button-block button-balanced" type="button" ng-click="userModel.register()">
+                        <button id="registerButton" class="button button-block button-balanced" type="button" ng-click="register()">
                             Register
                         </button>
                     </label>
-                    <label class="item">
-                        <div align="center" class="input-label">{{userModel.message}}</div>
-                     </label>
+                    <div align="center" class="error-container">
+                        {{userModel.message}}
+                    </div>
                 </div>
             </form>
-
-        </div>
     </ion-content>
-    <div class="bar bar-footer bar-balanced">
-        <div class="title">Copyright 2014 SquarePrism</div>
+    <div class="bar bar-footer bar-dark">
+        <h6 class="title">Copyright 2014 SquarePrism</h6>
     </div>
 </ion-view>
 

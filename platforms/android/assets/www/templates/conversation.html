@@ -1,0 +1,34 @@
+<style type="text/css">
+    .no-margin-left {
+        margin-left: 0px !important;
+    }
+
+    .no-margin-right {
+        margin-right: 0px !important;
+    }
+</style>
+
+<ion-view title="Conversation">
+  <ion-nav-buttons side="left">
+    <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+  </ion-nav-buttons>
+  <ion-content class="has-header has-footer">
+      <div ng-repeat="snippet in conversationModel.activeConversation.snippets">
+          <div class="card"
+               ng-class="{'no-margin-left':isCurrentUserSnippet(snippet),'no-margin-right':!isCurrentUserSnippet(snippet)}">
+              <div class="item item-text-wrap"
+                   ng-class="{'item-stable':isCurrentUserSnippet(snippet),'item-calm':!isCurrentUserSnippet(snippet)}">
+                  <small>{{snippet.message}}</small>
+              </div>
+          </div>
+      </div>
+  </ion-content>
+    <div class="bar bar-footer bar-stable">
+        <label class="item-input-wrapper">
+            <input id="searchTextField" type="text" placeholder="Type your message" ng-model="conversationModel.activeMessage">
+        </label>
+        <button id="sendMessageButton" class="button" ng-click="conversationModel.sendMessage()">
+            <i class="icon ion-paper-airplane"></i>
+        </button>
+    </div>
+</ion-view>
