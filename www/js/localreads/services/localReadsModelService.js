@@ -20,6 +20,11 @@ localreadsServices.service('LocalReadsModelService',
                  LocalReadsService){
 
 
+            function validateLatLong(userDetails){
+                if(!_.isNumber(userDetails.latitude) || !_.isNumber(userDetails.longitude)){
+                    $rootScope.$emit("loginReadsLatLongNotSet");
+                }
+            }
 
             return{
                 bootstrap:function(){
@@ -29,7 +34,7 @@ localreadsServices.service('LocalReadsModelService',
                     .then(function(response){
                             console.log(true);
                        if(response){
-                           self.getLatestBooks();
+                           self.getBooksNearby();
                            self.getOwnedBooks();
                            self.getConversations();
                        }
@@ -43,7 +48,9 @@ localreadsServices.service('LocalReadsModelService',
                     var responseData = $q.defer();
                         LocalReadsService.getUserInfo(UserModel.userName)
                         .then(function(response){
-                                console.log(response);
+
+                                validateLatLong(response.user);
+
                                 UserModel.user = response.user;
                                 responseData.resolve(true);
                         },(function(error){
@@ -65,19 +72,26 @@ localreadsServices.service('LocalReadsModelService',
                 },
 
 
-                getLatestBooks:function(){
+                getBooksNearby:function(){
                     var searchQuery = "none";
                     if(HomeModel.searchFilter.length > 3){
                         searchQuery = HomeModel.searchFilter
                     }
+                    var defer = $q.defer();
+
                     LocalReadsService.getBooksNearby(searchQuery)
-                        .then(function(response){
-                            if(response.status){
-                                HomeModel.ownerships = response.ownerships;
-                            }
-                        },(function(error){
-                            console.log("Error in getting books")
-                        }));
+                    .then(function(response){
+                        if(response.status){
+                            HomeModel.ownerships = response.ownerships;
+                        }else{
+                            HomeModel.ownerships = [];
+                        }
+                        defer.resolve(true);
+                    },(function(error){
+                        defer.resolve(true);
+                        console.log("Error in getting books");
+                    }));
+                    return defer.promise;
                 },
 
 
@@ -203,7 +217,7 @@ localreadsServices.filter('filterSearch', function (OwnershipsModel) {
                 //map the Shelf books to their ids
                 _.map(OwnershipsModel.ownerships,function(ownership){
                     return ownership.book.identifier;
-                }),book.identifier);
+                }),book.id);
         });
     };
 });

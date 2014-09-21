@@ -15,6 +15,7 @@
   <ion-content class="has-header has-footer">
       <div ng-repeat="snippet in conversationModel.activeConversation.snippets">
           <div class="card"
+               ng-class="{'slide-in-left':isCurrentUserSnippet(snippet),'slide-in-right':!isCurrentUserSnippet(snippet)}"
                ng-class="{'no-margin-left':isCurrentUserSnippet(snippet),'no-margin-right':!isCurrentUserSnippet(snippet)}">
               <div class="item item-text-wrap"
                    ng-class="{'item-stable':isCurrentUserSnippet(snippet),'item-calm':!isCurrentUserSnippet(snippet)}">

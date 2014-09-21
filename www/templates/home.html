@@ -1,4 +1,4 @@
-<ion-view title="Books Nearby">
+<ion-view title="Books Nearby" class="bar-assertive">
   <ion-nav-buttons side="left">
     <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
   </ion-nav-buttons>
@@ -9,9 +9,12 @@
                      type="search"
                      placeholder="Filter (3 characters minimum)"
                      ng-model="homeModel.searchFilter">
+              <i class="icon ion-looping" ng-show="isFiltering == true"></i>
           </label>
-          <button id="searchButton" class="button" ng-click="filterBooks()">
-              <i class="icon ion-funnel"></i>
+          <button class="button button-clear button-positive"
+             ng-show="homeModel.searchFilter"
+             ng-click="homeModel.searchFilter =''">
+              x
           </button>
       </div>
       <ion-content class="has-header">

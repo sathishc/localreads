@@ -7,7 +7,7 @@
       <div class="list">
           <span id = "{{ownership.id}}"
                 ng-dblclick="removeBook($event)"
-                class="item item-thumbnail-left"
+                class="item item-thumbnail-left slide-in-right"
                 ng-repeat="ownership in shelfModel.ownerships">
               <img ng-src="{{ownership.book.thumbnail}}" />
               <h2>{{ownership.book.name}}</h2>

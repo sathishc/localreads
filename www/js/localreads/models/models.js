@@ -71,9 +71,9 @@ angular.module('localreads.models', ['ngStorage'])
 })
 
 .factory('SettingsModel', function() {
-    var settings = [];
+    var placeName;
     return {
-        settings:settings
+        placeName:placeName
     };
 })
 

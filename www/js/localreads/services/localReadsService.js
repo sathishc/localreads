@@ -135,16 +135,6 @@ localreadsServices.service('LocalReadsService',
         }]);
 
 
-localreadsServices.factory('LocalReadsRedirectService',
-    ['$rootScope','$state',
-        function($rootScope,$state){
-            $rootScope.$on('authFailed',function(event){
-                console.log("received autFailed");
-                $state.go('app.login');
-            });
-        }
-    ]);
-
 
 
 
