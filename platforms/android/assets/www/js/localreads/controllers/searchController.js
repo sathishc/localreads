@@ -7,11 +7,19 @@ localReadControllers.controller('SearchCtrl', function($scope,
 
         $scope.searchResultsModel = SearchResultsModel;
 
+
         $scope.addToShelf = function($event){
             var volumeId = $event.currentTarget.id;
             LocalReadsModelService.addToShelf(volumeId);
         };
 
+        $scope.$watch('searchResultsModel.searchQuery', _.debounce(function(newValue,oldValue){
+            if(newValue != oldValue){
+                $scope.searchBooks();
+            }
+        },500));
+
+        $scope.isSearching = false;
         $scope.searchBooks = function(){
 
             if($scope.searchResultsModel.searchQuery == '' ||
@@ -20,15 +28,17 @@ localReadControllers.controller('SearchCtrl', function($scope,
                 return;
             }
 
-            console.log("Search books " + $scope.searchResultsModel.searchQuery);
 
+            $scope.isSearching = true;
             //search query is non-empty
             // use a service to load books from Google books
             var responseData = googleBookService.searchBooks($scope.searchResultsModel.searchQuery)
             .then(function(response){
-                $scope.updateResults(response);
+                    $scope.isSearching = false;
+                    $scope.updateResults(response);
             },(function(error){
-                console.log("Error in getting books")
+                    $scope.isSearching = false;
+                    console.log("Error in getting books")
             }));
         };
 

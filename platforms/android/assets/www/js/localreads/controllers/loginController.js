@@ -22,7 +22,11 @@ localReadControllers.controller('LoginCtrl',
 
         LocalReadsService.signup($scope.userModel.userName,$scope.userModel.password)
         .then(function(response){
-            $scope.userModel.message = response.message;
+                if(response.status){
+                    $scope.userModel.message = response.message;
+                    $scope.login();
+                }
+
         });
     };
 

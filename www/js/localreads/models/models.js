@@ -3,13 +3,7 @@
 angular.module('localreads.models', ['ngStorage'])
 
 .factory('UserModel', function($localStorage) {
-    //TODO revert to use localstorage after testing
     var user,token;
-    /*return {
-        user:user,
-        token:token,
-        restBaseUrl:"http://localhost:8080/"
-    };*/
     return $localStorage.$default({
         user:user,
         token:token,

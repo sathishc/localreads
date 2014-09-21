@@ -4,28 +4,44 @@
   </ion-nav-buttons>
   <ion-content class="has-header has-footer">
       <form>
-          <label class="item item-input">
-              <span class="input-label">Username</span>
-              <input type="text" ng-model="settingsModel.user.userName" disabled />
-          </label>
-          <label class="item range range-positive">
-              <span class="input-label">Search Radius: {{settingsModel.user.searchRadius}}</span>
-              <input type="range" ng-model="settingsModel.user.searchRadius" name="volume" min="1" max="25" value="2" />
-          </label>
+          <div class="card">
+              <label class="item item-input">
+                  <span class="input-label">Username</span>
+                  <input type="text" ng-model="userModel.user.userName" disabled />
+              </label>
+              <label class="item range range-positive">
+                  <span class="input-label">Search Radius: {{userModel.user.searchRadius}}</span>
+                  <input type="range" ng-model="userModel.user.searchRadius" name="volume" min="1" max="25" value="2" />
+              </label>
+          </div>
+          <div class="card">
+              <label class="item">
+                  <button type="button"
+                          class="button button-block button-positive"
+                          ng-click="openPlace()">
+                      Search and Set Location
+                  </button>
+              </label>
 
-          <label class="item item-input">
-              <span class="input-label">Latitude :</span>
-              <input type="number" ng-model="settingsModel.user.latitude" />
-          </label>
-          <label class="item item-input">
-              <span class="input-label">Longitude :</span>
-              <input type="number" ng-model="settingsModel.user.longitude" />
-          </label>
-          <label class="item">
-              <button id="settingsSaveButton" class="button button-block button-balanced" type="button" ng-click="save()">
-                  Save
-              </button>
-          </label>
+              <label class="item item-input">
+                  <span class="input-label">Latitude :</span>
+                  <input type="number" ng-model="userModel.user.latitude" />
+              </label>
+              <label class="item item-input">
+                  <span class="input-label">Longitude :</span>
+                  <input type="number" ng-model="userModel.user.longitude" />
+              </label>
+          </div>
+          <div class="card">
+              <label class="item">
+                  <button id="settingsSaveButton"
+                          class="button button-block button-balanced"
+                          ng-disabled="!settingsDirty"
+                          type="button" ng-click="save()">
+                      Save
+                  </button>
+              </label>
+          </div>
       </form>
   </ion-content>
     <div class="bar bar-footer bar-balanced">

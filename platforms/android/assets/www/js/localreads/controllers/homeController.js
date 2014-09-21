@@ -23,9 +23,24 @@ localReadControllers.controller('HomeCtrl', function($scope,$state,$ionicGesture
 
     };
 
+    $scope.isFiltering = false;
     $scope.filterBooks = function(){
-        LocalReadsModelService.getLatestBooks();
+        $scope.isFiltering = true;
+        LocalReadsModelService.getBooksNearby()
+            .then(function(){
+                $scope.isFiltering = false;
+            });
     };
+
+    $scope.$watch('homeModel.searchFilter', _.debounce(function(newValue,oldValue){
+        // This code will be invoked after 1 second from the last time 'id' has changed.
+        $scope.$apply(function(){
+            if(newValue != oldValue){
+                $scope.filterBooks();
+            }
+        })
+
+    },1000));
 
 
     $scope.getItemHeight = function(item, index) {

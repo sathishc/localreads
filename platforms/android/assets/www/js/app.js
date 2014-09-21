@@ -9,6 +9,7 @@ angular.module('localreads',
         'ngStorage',
         'localreads.controllers',
         'localreads.models',
+        'localreads.directives',
         'localreads.services'])
 
 .run(function($ionicPlatform,$rootScope,$state, LocalReadsModelService) {
@@ -29,10 +30,15 @@ angular.module('localreads',
 
       });
 
-      $rootScope.$on('authFailed',function(event){
+      $rootScope.$on('loginReadsAuthFailed',function(event){
             console.log("received autFailed");
             $state.go('app.login');
       });
+
+        $rootScope.$on('loginReadsLatLongNotSet',function(event){
+            console.log("Need to set lat or long");
+            $state.go('app.settings');
+        });
 })
 
 .config(function($stateProvider, $urlRouterProvider) {

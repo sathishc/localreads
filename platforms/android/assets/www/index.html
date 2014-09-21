@@ -18,6 +18,8 @@
       <!-- cordova script (this will be a 404 during development) -->
       <script src="cordova.js"></script>
 
+      <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
+      <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
       <script src="js/third-party/ng-storage.js"></script>
       <script src="js/third-party/underscore.min.js"></script>
 
@@ -25,12 +27,12 @@
       <script src="js/app.js"></script>
       <script src="js/localreads/models/models.js"></script>
 
+      <script src="js/localreads/directives/directives.js"></script>
 
       <script src="js/localreads/services/services.js"></script>
       <script src="js/localreads/services/googleBookService.js"></script>
       <script src="js/localreads/services/localReadsModelService.js"></script>
       <script src="js/localreads/services/localReadsService.js"></script>
-
 
       <script src="js/localreads/controllers/controllers.js"></script>
       <script src="js/localreads/controllers/loginController.js"></script>
@@ -38,14 +40,13 @@
       <script src="js/localreads/controllers/homeController.js"></script>
       <script src="js/localreads/controllers/requestController.js"></script>
       <script src="js/localreads/controllers/conversationController.js"></script>
-
-
       <script src="js/localreads/controllers/shelfController.js"></script>
       <script src="js/localreads/controllers/settingsController.js"></script>
       <script src="js/localreads/controllers/inboxController.js"></script>
+
   </head>
 
   <body ng-app="localreads" class="platform-android platform-cordova platform-webview">
-    <ion-nav-view></ion-nav-view>
+      <ion-nav-view animation="slide-left-right"></ion-nav-view>
   </body>
 </html>
