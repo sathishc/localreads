@@ -7,6 +7,7 @@ localReadControllers.controller('SettingsCtrl',
     $scope.settingsModel = SettingsModel;
 
     $scope.settingsDirty = false;
+    $scope.settingsMessage ="";
 
 
     $scope.save = function(){
@@ -18,35 +19,30 @@ localReadControllers.controller('SettingsCtrl',
         $scope.settingsDirty = true;
     },2000));
 
-    $scope.$watch('settingsModel.user.latitude', _.debounce(function(newValue,oldValue){
+    $scope.$watch('userModel.user.latitude', _.debounce(function(newValue,oldValue){
         $scope.settingsDirty = true;
     },2000));
 
-    $scope.$watch('settingsModel.user.longitude', _.debounce(function(newValue,oldValue){
+    $scope.$watch('userModel.user.longitude', _.debounce(function(newValue,oldValue){
         $scope.settingsDirty = true;
     },2000));
 
-        $scope.$watch('settingsModel.details', _.debounce(function(newValue,oldValue){
-            console.log(newValue);
-        },2000));
 
-
-    // Load the modal from the given template URL
-    $ionicModal.fromTemplateUrl('templates/settings-place.html', function(modal) {
-        $scope.settingsPlaceModal = modal;
-    }, {
-        // Use our scope for the scope of the modal to keep it simple
-        scope: $scope,
-        // The animation we want to use for the modal entrance
-        animation: 'slide-in-up'
-    });
-
-    $scope.openPlace = function() {
-        $scope.settingsPlaceModal.show();
+    $scope.setCurrentLocation = function(){
+        navigator.geolocation.getCurrentPosition(
+                function(point){
+                    console.log(point);
+                    $scope.$apply(function(){
+                        $scope.userModel.user.latitude = point.coords.latitude;
+                        $scope.userModel.user.longitude = point.coords.longitude;
+                        $scope.settingsMessage = "Set current location success";
+                    });
+                },
+                function(error){
+                    $scope.$apply(function(){
+                        $scope.settingsMessage = "Could not set to current location";
+                    });
+                }
+            );
     };
-
-    $scope.closePlace = function() {
-        $scope.settingsPlaceModal.hide();
-    };
-
 });

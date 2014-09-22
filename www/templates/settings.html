@@ -18,8 +18,8 @@
               <label class="item">
                   <button type="button"
                           class="button button-block button-positive"
-                          ng-click="openPlace()">
-                      Search and Set Location
+                          ng-click="setCurrentLocation()">
+                      Set Location to Current Position
                   </button>
               </label>
 
@@ -42,9 +42,7 @@
                   </button>
               </label>
           </div>
+          {{$scope.settingsMessage}}
       </form>
   </ion-content>
-    <div class="bar bar-footer bar-balanced">
-        <div class="title"></div>
-    </div>
 </ion-view>
