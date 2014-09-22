@@ -147,6 +147,7 @@
 /Users/SatSang/workspace/LocalReads/localreads-mobile/platforms/android/assets/www/plugins/com.ionic.keyboard/www/keyboard.js \
 /Users/SatSang/workspace/LocalReads/localreads-mobile/platforms/android/assets/www/plugins/org.apache.cordova.device/www \
 /Users/SatSang/workspace/LocalReads/localreads-mobile/platforms/android/assets/www/plugins/org.apache.cordova.device/www/device.js \
+/Users/SatSang/workspace/LocalReads/localreads-mobile/platforms/android/assets/www/templates/addToShelf.html \
 /Users/SatSang/workspace/LocalReads/localreads-mobile/platforms/android/assets/www/templates/conversation.html \
 /Users/SatSang/workspace/LocalReads/localreads-mobile/platforms/android/assets/www/templates/home.html \
 /Users/SatSang/workspace/LocalReads/localreads-mobile/platforms/android/assets/www/templates/inbox.html \

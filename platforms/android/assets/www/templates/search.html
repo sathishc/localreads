@@ -15,9 +15,8 @@
       </div>
       <ion-content class="has-header">
           <div class="list">
-              <span id="{{book.id}}" class="item item-thumbnail-left slide-in-left"
-                    on-swipe-left='addToShelf($event)'
-                    ng-dblclick='addToShelf($event)'
+              <span class="item item-thumbnail-left slide-in-left"
+                    on-tap='addToShelf(book)'
                     ng-repeat="book in searchResultsModel.searchResults | filterSearch">
                   <img ng-src="{{book.volumeInfo.imageLinks.smallThumbnail}}" />
                   <h2>{{book.volumeInfo.title}}</h2>
@@ -25,11 +24,5 @@
               </span>
           </div>
       </ion-content>
-      <div class="bar bar-footer bar-balanced">
-          <div class="title">
-              <i class="icon ion-arrow-left-b"></i>
-              swipe left to add
-          </div>
-      </div>
   </ion-content>
 </ion-view>

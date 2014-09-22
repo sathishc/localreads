@@ -1,16 +1,13 @@
-<div class="modal" xmlns="http://www.w3.org/1999/html">
-    <content scroll="true">
+<ion-modal-view>
+    <ion-header-bar>
+        <h1 class="title">Set Location</h1>
+    </ion-header-bar>
+    <ion-content scroll="true">
         <div class="list">
             <label class="item item-input-wrapper row">
-                <span class="input-label col">Place</span>
-                <!--<input class="item-calm col"
-                       ng-model="autocomplete"
-                       details="settingsModel.details"
-                       ng-autocomplete="settingsModel.autoCompleteResults"/>-->
-
                 <input class="item-calm col"
                        ng-model="settingsModel.placeName"
-                       googleplace/>
+                       googleplace disableTap/>
             </label>
             <label class="item item-text-wrap row">
                 <small>
@@ -31,5 +28,5 @@
                 <button class="button button-block" ng-click="closePlace()">Close</button>
             </div>
         </div>
-    </content>
-</div>
+    </ion-content>
+</ion-modal-view>

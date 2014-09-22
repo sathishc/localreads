@@ -5,17 +5,11 @@
     <ion-content class="has-header has-footer">
         <div class="list">
           <span class="item item-text-wrap slide-in-right"
-                ng-click="inboxModel.openConversation(conversation)"
+                ng-tap="inboxModel.openConversation(conversation)"
                 ng-repeat="conversation in inboxModel.conversations">
               <h4>{{conversation.receiverName}}</h4>
               <p>{{conversation.snippets[conversation.snippets.length-1].message}}</p>
           </span>
         </div>
     </ion-content>
-    <div class="bar bar-footer bar-balanced">
-        <div class="title">
-            <i class="icon ion-arrow-right-b"></i>
-            swipe right to delete
-        </div>
-    </div>
 </ion-view>

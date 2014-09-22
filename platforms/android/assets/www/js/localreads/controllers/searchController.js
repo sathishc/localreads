@@ -8,9 +8,8 @@ localReadControllers.controller('SearchCtrl', function($scope,
         $scope.searchResultsModel = SearchResultsModel;
 
 
-        $scope.addToShelf = function($event){
-            var volumeId = $event.currentTarget.id;
-            LocalReadsModelService.addToShelf(volumeId);
+        $scope.addToShelf = function(book){
+            LocalReadsModelService.addToShelf(book.id);
         };
 
         $scope.$watch('searchResultsModel.searchQuery', _.debounce(function(newValue,oldValue){
