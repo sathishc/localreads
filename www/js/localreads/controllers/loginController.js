@@ -65,7 +65,7 @@ localReadControllers.controller('LoginCtrl',
     $scope.loginGoogle = function(){
         window.plugins.googleplus.login(
             {
-                'iOSApiKey': '838496901013-8tcuqretrsms9povdvadt9netabokqg0.apps.googleusercontent.com'
+                'iOSApiKey': '838496901013-diuim5d532ski3n56udhmps6e9t3omhe.apps.googleusercontent.com'
             },
             function (obj) {
 
