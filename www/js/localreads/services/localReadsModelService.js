@@ -13,10 +13,10 @@
 
 localreadsServices.service('LocalReadsModelService',
     ['$rootScope','$q','$filter',
-        'UserModel','OwnershipsModel','HomeModel','InboxModel',
+        'UserModel','OwnershipsModel','HomeModel','InboxModel','ConversationModel',
         'LocalReadsService',
         function($rootScope,$q,$filter,
-                 UserModel,OwnershipsModel,HomeModel,InboxModel,
+                 UserModel,OwnershipsModel,HomeModel,InboxModel,ConversationModel,
                  LocalReadsService){
 
 
@@ -171,6 +171,8 @@ localreadsServices.service('LocalReadsModelService',
                                     //replace the existing snippets with new ones
                                     existing.snippets = response.conversation.snippets;
                                 }
+
+                                ConversationModel.activeMessage = "";
 
                             }
                         },(function(error){

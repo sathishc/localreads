@@ -33,6 +33,7 @@ localReadControllers.controller('HomeCtrl', function($scope,$state,$ionicPopup,
     $scope.initiateRequest = function(data){
         $scope.actionPopup.close();
         RequestModel.activeUserId = data.ownerId;
+        RequestModel.activeUserName = data.ownerName;
         RequestModel.activeBook = data.book;
 
         console.log(data);
