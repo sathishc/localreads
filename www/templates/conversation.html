@@ -1,10 +1,10 @@
 <style type="text/css">
     .no-margin-left {
-        margin-left: 0px !important;
+        margin-left: 0 !important;
     }
 
     .no-margin-right {
-        margin-right: 0px !important;
+        margin-right: 0 !important;
     }
 </style>
 
@@ -15,7 +15,6 @@
   <ion-content class="has-header has-footer">
       <div ng-repeat="snippet in conversationModel.activeConversation.snippets">
           <div class="card"
-               ng-class="{'slide-in-left':isCurrentUserSnippet(snippet),'slide-in-right':!isCurrentUserSnippet(snippet)}"
                ng-class="{'no-margin-left':isCurrentUserSnippet(snippet),'no-margin-right':!isCurrentUserSnippet(snippet)}">
               <div class="item item-text-wrap"
                    ng-class="{'item-stable':isCurrentUserSnippet(snippet),'item-calm':!isCurrentUserSnippet(snippet)}">
