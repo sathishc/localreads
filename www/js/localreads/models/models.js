@@ -3,11 +3,12 @@
 angular.module('localreads.models', ['ngStorage'])
 
 .factory('UserModel', function($localStorage) {
-    var user,token;
+    var user = {};
+    var token = {};
     return $localStorage.$default({
         user:user,
         token:token,
-        restBaseUrl:"http://130.211.252.177/"
+        restBaseUrl:"https://www.micolibrary.co/"
     });
 
 })

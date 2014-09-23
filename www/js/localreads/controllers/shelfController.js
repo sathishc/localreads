@@ -6,9 +6,10 @@ localReadControllers.controller('ShelfCtrl', function($scope, $ionicPlatform, $i
     $scope.shelfModel = OwnershipsModel;
 
     $scope.showConfirm = function (data) {
+
         var confirmPopup = $ionicPopup.confirm({
-            title: 'Delete Book',
-            template: 'Are you sure you want to remove this book from shelf?'
+            title: 'Delete ' + data.book.name,
+            template: 'Are you sure you want to remove ' + data.book.name  +' from shelf?'
         });
         confirmPopup.then(function(res) {
             if(res) {

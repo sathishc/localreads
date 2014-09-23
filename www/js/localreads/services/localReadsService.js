@@ -41,10 +41,12 @@ localreadsServices.service('LocalReadsService',
                 logout:function(){
                     return getHttpResponse('POST','api/logout');
                 },
-                signup:function(userName,password){
+                signup:function(userName,password,displayName,imageUrl){
                     var params = {
                         username:userName,
                         password:password,
+                        displayName:displayName,
+                        imageUrl:imageUrl,
                         latitude:13.9,
                         longitude:75.5};
                     return getHttpResponse('POST','register/add',params,params);

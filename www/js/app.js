@@ -61,6 +61,16 @@ angular.module('localreads',
             }
         })
 
+        .state('app.register', {
+            url: "/register",
+            views: {
+                'menuContent' :{
+                    templateUrl: "templates/register.html",
+                    controller: 'LoginCtrl'
+                }
+            }
+        })
+
 
         .state('app.home', { // display nearby books
           url: "/home",

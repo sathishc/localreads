@@ -5,7 +5,7 @@
     <ion-content class="has-header has-footer">
         <div class="list">
           <span class="item item-text-wrap slide-in-right"
-                ng-tap="inboxModel.openConversation(conversation)"
+                on-tap="inboxModel.openConversation(conversation)"
                 ng-repeat="conversation in inboxModel.conversations">
               <h4>{{conversation.receiverName}}</h4>
               <p>{{conversation.snippets[conversation.snippets.length-1].message}}</p>

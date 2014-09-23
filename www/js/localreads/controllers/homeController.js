@@ -14,7 +14,8 @@ localReadControllers.controller('HomeCtrl', function($scope,$state,$ionicPopup,
         // An elaborate, custom popup
         $scope.actionPopup = $ionicPopup.show({
             templateUrl: 'templates/addToShelf.html',
-            title: 'Add to Shelf',
+            title: 'You Selected',
+            subTitle:data.book.name,
             scope:$scope,
             buttons: [
                 { text: 'Cancel' }

@@ -2,7 +2,12 @@
     <ion-content class="has-header has-footer" back-img="img/bookstack.jpg">
             <form class="css-form card">
                 <div class="list">
-                    <label class="item item-input">
+                    <label class="item">
+                        <button id="loginButton" class="button button-block button-positive" type="button" ng-click="loginGoogle()">
+                            Sign in with Google+
+                        </button>
+                    </label>
+                    <!--<label class="item item-input">
                         <span class="input-label">Email Id</span>
                         <input type="email" name="email" ng-model="userModel.userName">
                     </label>
@@ -22,7 +27,7 @@
                     </label>
                     <div align="center" class="error-container">
                         {{userModel.message}}
-                    </div>
+                    </div>-->
                 </div>
             </form>
     </ion-content>
