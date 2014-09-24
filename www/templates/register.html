@@ -1,15 +1,14 @@
-<ion-view title="LocalReads Login">
-    <ion-content class="has-header" back-img="img/bookstack.jpg">
+<ion-view title="LocalReads Login" hide-nav-bar="true" hide-back-button="true">
+    <ion-content back-img="img/bookstack.jpg">
             <form class="css-form card">
                 <div class="list">
-
                     <label class="item item-input">
                         <span class="input-label">Full Name</span>
                         <input type="text" name="displayName" ng-model="userModel.user.displayName" disabled>
                     </label>
                     <label class="item item-input">
                         <span class="input-label">Email Id</span>
-                        <input type="email" name="email" ng-model="userModel.user.username">
+                        <input type="email" name="email" ng-model="userModel.user.username" disabled>
                     </label>
                     <label class="item item-input">
                         <span class="input-label">Password</span>
