@@ -8,6 +8,7 @@ angular.module('localreads.models', ['ngStorage'])
     return $localStorage.$default({
         user:user,
         token:token,
+        //restBaseUrl:"http://localhost:8080/"
         restBaseUrl:"https://www.microlibrary.co/"
     });
 

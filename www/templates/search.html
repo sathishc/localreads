@@ -12,6 +12,11 @@
                      ng-model="searchResultsModel.searchQuery">
               <i class="icon ion-looping" ng-show="isSearching == true"></i>
           </label>
+          <button class="button button-clear button-positive"
+                  ng-show="searchResultsModel.searchQuery"
+                  ng-click="searchResultsModel.searchQuery =''">
+              x
+          </button>
       </div>
       <ion-content class="has-header" scroll="true">
           <div class="list">

@@ -1,7 +1,7 @@
 {
-  "name": "mnionic",
+  "name": "localreads",
   "version": "1.0.0",
-  "description": "MNIonic: An Ionic project",
+  "description": "LocalReads: Discover Paper Books Nearby",
   "dependencies": {
     "gulp": "^3.5.6",
     "gulp-sass": "^0.7.1",
