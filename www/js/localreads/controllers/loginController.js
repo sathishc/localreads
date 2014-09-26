@@ -20,20 +20,37 @@ localReadControllers.controller('LoginCtrl',
             return;
         }
 
-        LocalReadsService.signup(
-            $scope.userModel.user.username,
-            $scope.userModel.user.password,
-            $scope.userModel.user.displayName,
-            $scope.userModel.user.imageUrl
-        )
-        .then(function(response){
-                if(response.status){
-                    $scope.userModel.message = response.message;
-                    $scope.login();
+
+        // at this point we have user name and other details,
+        // get the users location and use that information to sign up
+        LocalReadsModelService.setCurrentLocation()
+            .then(function(response){
+
+                if(!response){ // if we could not get the location, set some default value
+                    $scope.userModel.message = "Could not find current location";
+                    $scope.userModel.user.latitude = 11.0;
+                    $scope.userModel.user.longitude = 79.0;
                 }
-                else{
-                    $scope.userModel.message = response.message;
-                }
+
+                LocalReadsService.signup(
+                    $scope.userModel.user.username,
+                    $scope.userModel.user.password,
+                    $scope.userModel.user.displayName,
+                    $scope.userModel.user.imageUrl,
+                    $scope.userModel.user.latitude,
+                    $scope.userModel.user.longitude
+                )
+                .then(function(response){
+                    // if registration was successful, login the user
+                    if(response.status){
+                        $scope.userModel.message = response.message;
+                        $scope.login();
+                    }
+                    else{
+                        $scope.userModel.message = response.message;
+                    }
+            });
+
         });
     };
 

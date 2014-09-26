@@ -29,20 +29,6 @@ localReadControllers.controller('SettingsCtrl',
 
 
     $scope.setCurrentLocation = function(){
-        navigator.geolocation.getCurrentPosition(
-                function(point){
-                    console.log(point);
-                    $scope.$apply(function(){
-                        $scope.userModel.user.latitude = point.coords.latitude;
-                        $scope.userModel.user.longitude = point.coords.longitude;
-                        $scope.settingsMessage = "Set current location success";
-                    });
-                },
-                function(error){
-                    $scope.$apply(function(){
-                        $scope.settingsMessage = "Could not set to current location";
-                    });
-                }
-            );
+        LocalReadsModelService.setCurrentLocation();
     };
 });

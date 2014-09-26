@@ -41,14 +41,14 @@ localreadsServices.service('LocalReadsService',
                 logout:function(){
                     return getHttpResponse('POST','api/logout');
                 },
-                signup:function(userName,password,displayName,imageUrl){
+                signup:function(userName,password,displayName,imageUrl,latitude,longitude){
                     var params = {
                         username:userName,
                         password:password,
                         displayName:displayName,
                         imageUrl:imageUrl,
-                        latitude:13.9,
-                        longitude:75.5};
+                        latitude:latitude,
+                        longitude:longitude};
                     return getHttpResponse('POST','register/add',params,params);
                 },
                 getBooksNearby:function(searchFilter){

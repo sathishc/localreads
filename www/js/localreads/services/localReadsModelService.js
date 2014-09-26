@@ -13,10 +13,10 @@
 
 localreadsServices.service('LocalReadsModelService',
     ['$rootScope','$q','$filter',
-        'UserModel','OwnershipsModel','HomeModel','InboxModel','ConversationModel',
+        'UserModel','OwnershipsModel','HomeModel','InboxModel','ConversationModel','SettingsModel',
         'LocalReadsService',
         function($rootScope,$q,$filter,
-                 UserModel,OwnershipsModel,HomeModel,InboxModel,ConversationModel,
+                 UserModel,OwnershipsModel,HomeModel,InboxModel,ConversationModel,SettingsModel,
                  LocalReadsService){
 
 
@@ -57,6 +57,26 @@ localreadsServices.service('LocalReadsModelService',
                             console.log("Error in getting User");
                                 responseData.resolve(false);
                         }));
+                    return responseData.promise;
+                },
+                setCurrentLocation:function(){
+                    var responseData = $q.defer();
+                    navigator.geolocation.getCurrentPosition(
+                        function(point){
+                            $rootScope.$apply(function(){
+                                UserModel.user.latitude = point.coords.latitude;
+                                UserModel.user.longitude = point.coords.longitude;
+                                SettingsModel.settingsMessage = "Set current location success";
+                            });
+                            responseData.resolve(true);
+                        },
+                        function(error){
+                            $scope.$apply(function(){
+                                SettingsModel.settingsMessage = "Could not set to current location";
+                            });
+                            responseData.resolve(false);
+                        }
+                    );
                     return responseData.promise;
                 },
 
