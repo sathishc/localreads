@@ -23,7 +23,6 @@ localreadsServices.factory('401Interceptor',
     function($rootScope, $q,UserModel) {
         return {
             request: function(config) {
-                console.log(config.url);
                 if(config.url.indexOf(UserModel.restBaseUrl)>-1){
                     config.headers.Authorization = UserModel.token;
                 }
@@ -52,33 +51,6 @@ localreadsServices.factory('401Interceptor',
         };
     }]);
 
-localreadsServices.service('googlePlaceService', ['$document', '$q', '$rootScope',
-    function($document, $q, $rootScope) {
-        var d = $q.defer();
-        function onScriptLoad() {
-            // Load client in the browser
-            $rootScope.$apply(function() { d.resolve(window.d3); });
-        }
-        // Create a script tag with d3 as the source
-        // and call our onScriptLoad callback when it
-        // has been loaded
-        var scriptTag = $document[0].createElement('script');
-        scriptTag.type = 'text/javascript';
-        scriptTag.async = true;
-        scriptTag.src = 'http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false&' + 'callback=initialize';
-        scriptTag.onreadystatechange = function () {
-            if (this.readyState == 'complete') onScriptLoad();
-        };
-        scriptTag.onload = onScriptLoad;
-
-        var s = $document[0].getElementsByTagName('body')[0];
-        s.appendChild(scriptTag);
-
-        return {
-            d3: function() { return d.promise; }
-        };
-    }
-]);
 
 localreadsServices.config(['$httpProvider', function($httpProvider) {
     $httpProvider.interceptors.push('401Interceptor');

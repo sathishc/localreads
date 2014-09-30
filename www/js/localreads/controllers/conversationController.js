@@ -1,7 +1,7 @@
 'use strict';
 
 localReadControllers.controller('ConversationCtrl',
-    function($scope,
+    function($scope,$ionicScrollDelegate,
             UserModel,
             ConversationModel,
             LocalReadsModelService) {
@@ -16,7 +16,17 @@ localReadControllers.controller('ConversationCtrl',
 
     $scope.isCurrentUserSnippet = function(snippet){
          return snippet.senderUserId == UserModel.user.id;
-    }
+    };
+
+    $scope.$watch('conversationModel.activeConversation.snippets.length',function(newValue,oldValue){
+        if(newValue != oldValue){
+            $ionicScrollDelegate.$getByHandle('activeConversationContent').scrollBottom(true);
+        }
+    });
+
+    $scope.$watch('conversationModel.activeConversation',function(newValue,oldValue){
+        $ionicScrollDelegate.$getByHandle('activeConversationContent').scrollBottom();
+    });
 
 
 });

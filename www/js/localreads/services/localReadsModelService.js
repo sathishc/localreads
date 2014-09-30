@@ -26,14 +26,50 @@ localreadsServices.service('LocalReadsModelService',
                 }
             }
 
+            function setupConversationChannel(){
+                var socket = new SockJS(UserModel.restBaseUrl + "stomp");
+                var client = Stomp.over(socket);
+
+                client.connect(
+                    {}, function(frame) {
+
+                        console.log(frame);
+
+                        client.subscribe("/queue/conversations/" + UserModel.token , function(message) {
+
+                            var conversationDetails = JSON.parse(message.body);
+                            var conversation = _.find(InboxModel.conversations,function(conversation){
+                                return conversation.id == conversationDetails.id;
+                            });
+
+                            $rootScope.$apply(function(){
+                                if(conversation){ // found a conversation, so add the snippet to it
+                                    conversation.snippets.push(conversationDetails.snippet);
+                                }else{
+                                    // no existing conversation. create a new one
+                                    var newConversation = {
+                                        'id':conversationDetails.id,
+                                        receiverName:conversationDetails.receiverName
+                                    };
+                                    newConversation.snippets = [];
+                                    newConversation.snippets.push(conversationDetails.snippet);
+                                    InboxModel.conversations.push(newConversation);
+                                }
+                            });
+                        });
+                    });
+            }
+
             return{
                 bootstrap:function(){
                     var self = this;
                     // populate data
                     this.getUserInfo()
                     .then(function(response){
-                            console.log(true);
                        if(response){
+
+                           setupConversationChannel();
+
                            self.getBooksNearby();
                            self.getOwnedBooks();
                            self.getConversations();

@@ -12,12 +12,12 @@
   <ion-nav-buttons side="left">
     <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
   </ion-nav-buttons>
-  <ion-content class="has-header has-footer">
+  <ion-content class="has-header has-footer" delegate-handle="activeConversationContent">
       <div ng-repeat="snippet in conversationModel.activeConversation.snippets">
           <div class="card"
                ng-class="{'no-margin-left':isCurrentUserSnippet(snippet),'no-margin-right':!isCurrentUserSnippet(snippet)}">
               <div class="item item-text-wrap"
-                   ng-class="{'item-stable':isCurrentUserSnippet(snippet),'item-calm':!isCurrentUserSnippet(snippet)}">
+                   ng-class="{'item-stable':isCurrentUserSnippet(snippet),'item-positive':!isCurrentUserSnippet(snippet)}">
                   <small>{{snippet.message}}</small>
               </div>
           </div>
